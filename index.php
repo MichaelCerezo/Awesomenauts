@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html>
+<!-- Melon JS Loading Screen -->
 	<head>
 		<title>melonJS Template</title>
 		<link rel="stylesheet" type="text/css" media="screen" href="index.css">

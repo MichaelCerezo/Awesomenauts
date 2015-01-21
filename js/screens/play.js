@@ -6,6 +6,8 @@ game.PlayScreen = me.ScreenObject.extend({
 		// reset the score
 		game.data.score = 0;
 
+		me.levelDirector.loadLevel("level01");
+
 		// add our HUD to the game world
 		this.HUD = new game.HUD.Container();
 		me.game.world.addChild(this.HUD);
@@ -16,7 +18,7 @@ game.PlayScreen = me.ScreenObject.extend({
 	 *  action to perform when leaving this screen (state change)
 	 */
 	onDestroyEvent: function() {
-		// remove the HUD from the game world
+		// remove the HUD from the game worlds
 		me.game.world.removeChild(this.HUD);
 	}
 });

@@ -19,7 +19,7 @@ game.PlayerEntity = me.Entity.extend({
 	},
 
 	update: function (delta){
-		
+		// sets the player entity to move
 		if(me.input.isKeyPressed("right")){
 			// adds to the position of my x by the velocity defined above in
 			// setVelocity() and multiplying it by me.timer.tick.

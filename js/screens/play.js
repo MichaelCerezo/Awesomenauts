@@ -9,6 +9,7 @@ game.PlayScreen = me.ScreenObject.extend({
 		// lets the game know what map to load
 		me.levelDirector.loadLevel("level01");
 
+		// Adds player
 		var player = me.pool.pull("player", 0, 0, {});
 		me.game.world.addChild(player, 5);
 

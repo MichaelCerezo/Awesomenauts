@@ -16,9 +16,11 @@ game.PlayerEntity = me.Entity.extend({
 
 		this.body.setVelocity(5, 20);
 
+		// Sets animation to the player
 		this.renderable.addAnimation("idle", [78]);
 		this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 122, 123, 124, 125], 80);
 
+		// Sets animation that the player starts with
 		this.renderable.setCurrentAnimation("idle");
 	},
 
@@ -29,13 +31,13 @@ game.PlayerEntity = me.Entity.extend({
 			// setVelocity() and multiplying it by me.timer.tick.
 			// me.timer.tick makes the movementlook smooth
 			this.body.vel.x += this.body.accel.x * me.timer.tick;
+			// Makes player walk right
 			this.flipX(true);
 		}else if(me.input.isKeyPressed("left")){
 			// adds to the position of my x by the velocity defined above in
 			// setVelocity() and multiplying it by me.timer.tick.
 			// me.timer.tick makes the movementlook smooth
 			this.body.vel.x -= this.body.accel.x * me.timer.tick;
-			this.flipX(true);
 		}else if(me.input.isKeyPressed("up")){
 			// adds to the position of my x by the velocity defined above in
 			// setVelocity() and multiplying it by me.timer.tick.
@@ -50,6 +52,7 @@ game.PlayerEntity = me.Entity.extend({
 			this.body.vel.x = 0;
 		}
 
+		// Sets animation when needed
 		if(this.body.vel.x !==0){
 			if(!this.renderable.isCurrentAnimation("walk")){
 				this.renderable.setCurrentAnimation("walk");

@@ -1,3 +1,4 @@
+// Sets Player Properties
 game.PlayerEntity = me.Entity.extend({
 	// Sets up constructer functions and parameters
 	init: function (x, y, settings){
@@ -69,6 +70,8 @@ game.PlayerEntity = me.Entity.extend({
 		return true;
 	}
 });
+
+// Sets PlayerBase Properties
 game.PlayerBaseEntity = me.Entity.extend({
 	init: function (x, y, settings){
 		this._super(me.Entity, 'init', [x, y, {
@@ -81,6 +84,7 @@ game.PlayerBaseEntity = me.Entity.extend({
 				return(new me.Rect(0, 0, 100, 100)).toPolygon()
 			}
 		}]);
+		// Lets the program know the base still has life
 		this.broken = false;
 		this.health = 10;
 		this.alwaysUpdate = true;
@@ -89,6 +93,7 @@ game.PlayerBaseEntity = me.Entity.extend({
 		this.type = "PlayerBaseEntity";
 	},
 
+	// Updates the bases life to know when its broken
 	update: function(delta){
 		if(this.health<=0){
 			this.broken = true;
@@ -104,6 +109,7 @@ game.PlayerBaseEntity = me.Entity.extend({
 	}
 });
 
+// Sets EnemyBase Properties
 game.EnemyBaseEntity = me.Entity.extend({
 	init: function (x, y, settings){
 		this._super(me.Entity, 'init', [x, y, {
@@ -116,6 +122,7 @@ game.EnemyBaseEntity = me.Entity.extend({
 				return(new me.Rect(0, 0, 100, 100)).toPolygon()
 			}
 		}]);
+		// Lets the program know the base still has life
 		this.broken = false;
 		this.health = 10;
 		this.alwaysUpdate = true;
@@ -124,6 +131,7 @@ game.EnemyBaseEntity = me.Entity.extend({
 		this.type = "EnemyBaseEntity";
 	},
 
+	// Updates the bases life to know when its broken
 	update: function(delta){
 		if(this.health<=0){
 			this.broken = true;

@@ -16,6 +16,7 @@ game.PlayerEntity = me.Entity.extend({
 		}]);
 
 		this.body.setVelocity(5, 20);
+		me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
 
 		// Sets animation to the player
 		this.renderable.addAnimation("idle", [78]);
@@ -39,6 +40,7 @@ game.PlayerEntity = me.Entity.extend({
 			// setVelocity() and multiplying it by me.timer.tick.
 			// me.timer.tick makes the movementlook smooth
 			this.body.vel.x -= this.body.accel.x * me.timer.tick;
+			this.flipX(false);
 		}else if(me.input.isKeyPressed("up")){
 			// adds to the position of my x by the velocity defined above in
 			// setVelocity() and multiplying it by me.timer.tick.
@@ -91,12 +93,18 @@ game.PlayerBaseEntity = me.Entity.extend({
 		this.body.onCollision = this.onCollision.bind(this);
 
 		this.type = "PlayerBaseEntity";
+	
+		this.renderable.addAnimation("idle", [0]);
+		this.renderable.addAnimation("broken", [1]);
+		this.renderable.setCurrentAnimation("idle");
+
 	},
 
 	// Updates the bases life to know when its broken
 	update: function(delta){
 		if(this.health<=0){
 			this.broken = true;
+			this.renderable.addAnimation("broken");
 		}
 		this.body.update(delta);
 
@@ -129,12 +137,18 @@ game.EnemyBaseEntity = me.Entity.extend({
 		this.body.onCollision = this.onCollision.bind(this);
 
 		this.type = "EnemyBaseEntity";
+
+		this.renderable.addAnimation("idle", [0]);
+		this.renderable.addAnimation("broken", [1]);
+		this.renderable.setCurrentAnimation("idle");
+
 	},
 
 	// Updates the bases life to know when its broken
 	update: function(delta){
 		if(this.health<=0){
 			this.broken = true;
+			this.renderable.addAnimation("broken");
 		}
 		this.body.update(delta);
 

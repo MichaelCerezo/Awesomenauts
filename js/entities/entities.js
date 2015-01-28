@@ -41,16 +41,6 @@ game.PlayerEntity = me.Entity.extend({
 			// me.timer.tick makes the movementlook smooth
 			this.body.vel.x -= this.body.accel.x * me.timer.tick;
 			this.flipX(false);
-		}else if(me.input.isKeyPressed("up")){
-			// adds to the position of my x by the velocity defined above in
-			// setVelocity() and multiplying it by me.timer.tick.
-			// me.timer.tick makes the movementlook smooth
-			this.body.vel.y -= this.body.accel.x * me.timer.tick;
-		}else if(me.input.isKeyPressed("down")){
-			// adds to the position of my x by the velocity defined above in
-			// setVelocity() and multiplying it by me.timer.tick.
-			// me.timer.tick makes the movementlook smooth
-			this.body.vel.y += this.body.accel.x * me.timer.tick;
 		}else{
 			this.body.vel.x = 0;
 		}
@@ -94,7 +84,9 @@ game.PlayerBaseEntity = me.Entity.extend({
 
 		this.type = "PlayerBaseEntity";
 	
+		// Sets base to look fine
 		this.renderable.addAnimation("idle", [0]);
+		// Sets base to look destroyed
 		this.renderable.addAnimation("broken", [1]);
 		this.renderable.setCurrentAnimation("idle");
 
@@ -138,7 +130,9 @@ game.EnemyBaseEntity = me.Entity.extend({
 
 		this.type = "EnemyBaseEntity";
 
+		// Sets base to look fine
 		this.renderable.addAnimation("idle", [0]);
+		// Sets base to look destroyed
 		this.renderable.addAnimation("broken", [1]);
 		this.renderable.setCurrentAnimation("idle");
 

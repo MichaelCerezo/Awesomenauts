@@ -16,11 +16,13 @@ game.PlayerEntity = me.Entity.extend({
 		}]);
 
 		this.body.setVelocity(5, 20);
+		// Sets camera to follow character
 		me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
 
 		// Sets animation to the player
 		this.renderable.addAnimation("idle", [78]);
 		this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 122, 123, 124, 125], 80);
+		this.renderable.addAnimation("attack", [65, 66, 67, 68, 69, 70, 71, 72], 80);
 
 		// Sets animation that the player starts with
 		this.renderable.setCurrentAnimation("idle");
@@ -41,17 +43,50 @@ game.PlayerEntity = me.Entity.extend({
 			// me.timer.tick makes the movementlook smooth
 			this.body.vel.x -= this.body.accel.x * me.timer.tick;
 			this.flipX(false);
-		}else{
+		}else if (me.input.isKeyPressed('jump')) {   
+    		if (!this.body.jumping && !this.body.falling) {
+      			// set current vel to the maximum defined value
+      			// gravity will then do the rest
+      			this.body.vel.y = -this.body.maxVel.y * me.timer.tick;
+      			// set the jumping flag
+      			this.body.jumping = true;
+    		}
+  		}else{
 			this.body.vel.x = 0;
 		}
 
+		if (me.input.isKeyPressed("attack")) {
+			if(!this.renderable.isCurrentAnimation("attack")){
+				console.log(!this.renderable.isCurrentAnimation("attack"));
+				// Sets the current animation to attack and once that is over
+				// goes back to the idle animation
+				this.renderable.setCurrentAnimation("attack", "idle");
+				// Makes it so that the next time we start this sequencewe begin
+				// from the first animation, not wherever we left off when we
+				// switched off to another animation
+				this.renderable.setAnimationFrame();
+			}
+		}
 		// Sets animation when needed
-		if(this.body.vel.x !==0){
+		else if(this.body.vel.x !==0){
 			if(!this.renderable.isCurrentAnimation("walk")){
 				this.renderable.setCurrentAnimation("walk");
 			}
 		}else{
 			this.renderable.setCurrentAnimation("idle");	
+		}
+
+		if (me.input.isKeyPressed("attack")) {
+			if(!this.renderable.isCurrentAnimation("attack")){
+				console.log(!this.renderable.isCurrentAnimation("attack"));
+				// Sets the current animation to attack and once that is over
+				// goes back to the idle animation
+				this.renderable.setCurrentAnimation("attack", "idle");
+				// Makes it so that the next time we start this sequencewe begin
+				// from the first animation, not wherever we left off when we
+				// switched off to another animation
+				this.renderable.setAnimationFrame();
+			}
 		}
 
 

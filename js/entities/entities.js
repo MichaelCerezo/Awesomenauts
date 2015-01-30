@@ -108,7 +108,7 @@ game.PlayerBaseEntity = me.Entity.extend({
 			spritewidth: "100",
 			spriteheight: "100",
 			getShape: function(){
-				return(new me.Rect(0, 0, 100, 100)).toPolygon()
+				return(new me.Rect(0, 0, 100, 60)).toPolygon()
 			}
 		}]);
 		// Lets the program know the base still has life
@@ -154,7 +154,8 @@ game.EnemyBaseEntity = me.Entity.extend({
 			spritewidth: "100",
 			spriteheight: "100",
 			getShape: function(){
-				return(new me.Rect(0, 0, 100, 100)).toPolygon()
+				// lowered the base to 60
+				return(new me.Rect(0, 0, 100, 60)).toPolygon()
 			}
 		}]);
 		// Lets the program know the base still has life

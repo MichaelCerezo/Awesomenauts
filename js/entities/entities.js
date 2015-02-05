@@ -106,6 +106,7 @@ game.PlayerEntity = me.Entity.extend({
 			var ydif = this.pos.y - response.b.pos.y;
 			var xdif = this.pos.x - response.b.pos.x;
 
+			// lets the player land on the base
 			if(ydif<-40 && xdif< 55 && xdif>-25){
 				this.body.falling = false;
 				this.body.vel.y = -1;

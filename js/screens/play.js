@@ -10,7 +10,7 @@ game.PlayScreen = me.ScreenObject.extend({
 		me.levelDirector.loadLevel("level01");
 
 		// Adds player
-		var player = me.pool.pull("player", 0, 0, {});
+		var player = me.pool.pull("player", 0, 500, {});
 		me.game.world.addChild(player, 5);
 
 		// Manages game timers

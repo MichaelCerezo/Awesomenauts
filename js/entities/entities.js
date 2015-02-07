@@ -19,7 +19,7 @@ game.PlayerEntity = me.Entity.extend({
 		// Keeps track of which direction your player is going
 		this.facing = "right"; 
 		// returns the numeric value corresponding to the time for the specified date according to universal time. 
-		this.new = new Date().getTime();
+		this.now = new Date().getTime();
 		this.lastHit = this.now;
 		this.lastAttack = new Date().getTime();
 		// Sets camera to follow character
@@ -111,7 +111,7 @@ game.PlayerEntity = me.Entity.extend({
 			}
 
 			// Checks if player is attacking
-			if(this.renderable.isCurrentAnimation('attack') && this.now-this.lastHit >= 1000){
+			if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= 300){
 				console.log("tower Hit");
 				this.lastHit = this.now;
 				// Sets enemy base to lose health
@@ -201,7 +201,7 @@ game.EnemyBaseEntity = me.Entity.extend({
 	update: function(delta){
 		if(this.health<=0){
 			this.broken = true;
-			this.renderable.addAnimation("broken");
+			this.renderable.setCurrentAnimation("broken");
 		}
 		this.body.update(delta);
 
@@ -271,7 +271,7 @@ game.GameManager = Object.extend({
 
 		if(Math.round(this.now/1000) %10 ===0 && (this.now - this.lastCreep >= 1000)){
 			this.lastCreep = this.now;
-			var creepe = me.pool.pull("EnemyCreep", 1000, 0, {});
+			var creepe = me.pool.pull("EnemyCreep", 2285, 500, {});
 			me.game.world.addChild(creepe, 5);
 		}
 

@@ -15,7 +15,7 @@ game.PlayerEntity = me.Entity.extend({
 			}
 		}]);
 		this.type = "PlayerEntity";
-
+		this.health = 20;
 		this.body.setVelocity(10, 20);
 		// Keeps track of which direction your player is going
 		this.facing = "right"; 
@@ -36,6 +36,10 @@ game.PlayerEntity = me.Entity.extend({
 	},
 
 	update: function (delta){
+		// removes player when dead
+		if(this.health <= 0){
+			me.game.world.removeChild(this);
+		}
 		this.now = new Date().getTime();
 		// sets the player entity to move
 		if(me.input.isKeyPressed("right")){
@@ -96,6 +100,7 @@ game.PlayerEntity = me.Entity.extend({
 
 	loseHealth: function(damage){
 		this.health = this.health - damage; 
+		console.log(this.health);
 	},
 
 	collideHandler: function(response){
@@ -122,7 +127,30 @@ game.PlayerEntity = me.Entity.extend({
 				// Sets enemy base to lose health
 				response.b.loseHealth();
 			}
-		}
+		}else if(response.b.type==="EnemyCreep"){
+				var xdif = this.pos.x - response.b.pos.x;
+				var ydif = this.pos.y - response.b.pos.y;
+
+				if(xdif>0){
+					this.pos.x = this.pos.x + 1;
+					if(this.facing==="left"){
+						this.body.vel.x = 0;
+					}
+				}else{
+					this.pos.x = this.pos.x - 1;
+					if(this.facing==="right"){
+						this.body.vel.x = 0;
+					}
+				}
+				if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= 300
+						// doesnt let player attack creep from top bottom or behind
+						&&  (Math.abs(ydif) <= 40) &&
+						(((xdif>0) && this.facing==="left") || ((xdif<0) && this.facing==="right"))
+						){
+					this.lastHit = this.now;
+					response.b.loseHealth(1);
+				}
+			}
 	}
 });
 
@@ -256,7 +284,16 @@ game.EnemyCreep = me.Entity.extend({
 		this.renderable.setCurrentAnimation("walk");
 	},
 
+	loseHealth: function(damage){
+		this.health = this.health - damage; 
+	},
+
 	update: function(delta){
+		console.log(this.health);
+		// removes creep when dead
+		if(this.health <= 0){
+			me.game.world.removeChild(this);
+		}
 		this.now = new Date().getTime();
 
 		// Has the creep walk left
@@ -276,7 +313,6 @@ game.EnemyCreep = me.Entity.extend({
 			this.attacking=true;
 			// this.lastAttacking=this.now;
 			if(xdif>0){
-				console.log(xdif);
 				// keeps movingthe creep to the right to maintain position
 				this.pos.x = this.pos.x + 1;
 				this.body.vel.x = 0;

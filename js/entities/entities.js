@@ -37,17 +37,10 @@ game.PlayerEntity = me.Entity.extend({
 	},
 
 	update: function (delta){
-		// removes player when dead
-		if(this.health <= 0){
-			me.game.world.removeChild(this);
-		}
 		this.now = new Date().getTime();
 
 		if(this.health <= 0){
 			this.dead = true;
-			this.pos.x = 10;
-			this.pos.y = 0;
-			this.health = game.data.playerHealth;
 		}
 
 		// sets the player entity to move
@@ -123,10 +116,10 @@ game.PlayerEntity = me.Entity.extend({
 				this.body.vel.y = -1;
 			}else if(xdif>-35 && this.facing==='right' && (xdif<0)){
 				this.body.vel.x = 0;
-				this.pos.x = this.pos.x - 1;
+				// this.pos.x = this.pos.x - 1;
 			}else if(xdif<70 && this.facing==='left' && (xdif>0)){
 				this.body.vel.x = 0;
-				this.pos.x = this.pos.x + 1;
+				// this.pos.x = this.pos.x + 1;
 			}
 
 			// Checks if player is attacking
@@ -141,12 +134,12 @@ game.PlayerEntity = me.Entity.extend({
 				var ydif = this.pos.y - response.b.pos.y;
 
 				if(xdif>0){
-					this.pos.x = this.pos.x + 1;
+					// this.pos.x = this.pos.x + 1;
 					if(this.facing==="left"){
 						this.body.vel.x = 0;
 					}
 				}else{
-					this.pos.x = this.pos.x - 1;
+					// this.pos.x = this.pos.x - 1;
 					if(this.facing==="right"){
 						this.body.vel.x = 0;
 					}
@@ -366,6 +359,11 @@ game.GameManager = Object.extend({
 	update: function(){
 		// Keeps track of timer
 		this.now = new Date().getTime();
+
+		if (game.data.player.dead){
+			me.game.world.removeChild(game.data.player);
+			me.state.current().resetPlayer(10, 0);
+		}
 
 		if(Math.round(this.now/1000) %10 ===0 && (this.now - this.lastCreep >= 1000)){
 			this.lastCreep = this.now;

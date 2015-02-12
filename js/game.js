@@ -56,6 +56,7 @@ var game = {
 		// Registers the player function that can make multiple instances of the player
 		me.pool.register("player", game.PlayerEntity, true);
 		me.pool.register("PlayerBase", game.PlayerBaseEntity);
+		me.pool.register("PlayerCreep", game.PlayerCreep, true);
 		me.pool.register("EnemyBase", game.EnemyBaseEntity);
 		me.pool.register("EnemyCreep", game.EnemyCreep, true);
 		me.pool.register("GameManager", game.GameManager);

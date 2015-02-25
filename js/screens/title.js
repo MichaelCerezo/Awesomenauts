@@ -23,6 +23,7 @@ game.TitleScreen = me.ScreenObject.extend({
 				me.state.change(me.state.PLAY);
 			}
 		});
+		// me.audio.playTrack("Awesomenauts");
 	},
 	
 	
@@ -32,5 +33,6 @@ game.TitleScreen = me.ScreenObject.extend({
 	onDestroyEvent: function() {
 		me.input.unbindKey(me.input.KEY.ENTER); // TODO
 		me.event.unsubscribe(this.handler);
+		// me.audio.unplay("Awesomenauts");
 	}
 });

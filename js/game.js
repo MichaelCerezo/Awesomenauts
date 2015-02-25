@@ -9,7 +9,7 @@ var game = {
 		enemyBaseHealth: 10,
 		playerBaseHealth: 10,
 		enemyCreepHealth: 10,
-		playerHealth: 10,
+		playerHealth: 50,
 		enemyCreepAttack: 1,
 		playerAttack: 1,
 		playerAttackTimer: 300,
@@ -17,8 +17,13 @@ var game = {
 		playerMoveSpeed: 10,
 		creepMoveSpeed: 5,
 		gameManager: "",
-		player: ""
-
+		player: "",
+		exp: 0,
+		gold: 0,
+		exp1: 0,
+		exp2: 0,
+		exp3: 0,
+		exp4: 0
 	},
 	
 	
@@ -40,6 +45,7 @@ var game = {
 
 	// Initialize the audio.
 	me.audio.init("mp3,ogg");
+	
 
 	// Set a callback to run when loading is complete.
 	me.loader.onload = this.loaded.bind(this);

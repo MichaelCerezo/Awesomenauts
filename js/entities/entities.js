@@ -3,8 +3,8 @@ game.PlayerEntity = me.Entity.extend({
 	// Sets up constructer functions and parameters
 	init: function (x, y, settings){
 		this.setSuper();
-		this.setPlayerTimers();
 		this.setAttributes();
+		this.setPlayerTimers();
 		this.type = "PlayerEntity";
 		this.setFlags();
 		
@@ -29,7 +29,7 @@ game.PlayerEntity = me.Entity.extend({
 			spritewidth: "64",
 			spriteheight: "64",
 			getShape: function (){
-				return(new me.Rect(0, 0, 64, 64)).toPolygon();
+			`	return(new me.Rect(0, 0, 64, 64)).toPolygon();
 			}
 		}]);
 	},
@@ -63,40 +63,10 @@ game.PlayerEntity = me.Entity.extend({
 	update: function (delta){
 		this.now = new Date().getTime();
 
-		if(this.health <= 0){
-			this.dead = true;
-			me.audio.play("Dying");
-		}
+		// Handles the checkIfDead function
+		this.dead = checkIfDead();
 
-		// sets the player entity to move
-		if(me.input.isKeyPressed("right")){
-			// adds to the position of my x by the velocity defined above in
-			// setVelocity() and multiplying it by me.timer.tick.
-			// me.timer.tick makes the movementlook smooth
-			this.body.vel.x += this.body.accel.x * me.timer.tick;
-			this.facing = "right";
-			// Makes player walk right
-			this.flipX(true);
-		}else if(me.input.isKeyPressed("left")){
-			// adds to the position of my x by the velocity defined above in
-			// setVelocity() and multiplying it by me.timer.tick.
-			// me.timer.tick makes the movementlook smooth
-			this.body.vel.x -= this.body.accel.x * me.timer.tick;
-			this.facing = "left";
-			// Makes player walk left
-			this.flipX(false);
-		}else if (me.input.isKeyPressed('jump')) {   
-    		if (!this.body.jumping && !this.body.falling) {
-      			// set current vel to the maximum defined value
-      			// gravity will then do the rest
-      			this.body.vel.y = -this.body.maxVel.y * me.timer.tick;
-      			// set the jumping flag
-      			this.body.jumping = true;
-      			me.audio.play("Boing");
-    		}
-  		}else{
-			this.body.vel.x = 0;
-		}
+		this.checkKeyPressedAndMoved();
 
 		if (me.input.isKeyPressed("attack")) {
 			if(!this.renderable.isCurrentAnimation("attack")){
@@ -125,6 +95,58 @@ game.PlayerEntity = me.Entity.extend({
 		this._super(me.Entity, "update", [delta])
 		return true;
 	},
+
+	checkIfDead: function(){
+		if(this.health <= 0){
+		 	return true;
+		 	me.audio.play("Dying");
+		}
+		return false;
+	},
+
+	checkKeyPressedAndMoved: function(){
+		// sets the player entity to move
+		if(me.input.isKeyPressed("right")){
+			this.moveRight();
+		}else if(me.input.isKeyPressed("left")){
+			this.moveLeft();
+		}else if (me.input.isKeyPressed('jump')) {   
+    		this.jump();
+  		}else{
+			this.body.vel.x = 0;
+		}
+	},
+
+	moveRight: function(){
+		// adds to the position of my x by the velocity defined above in
+			// setVelocity() and multiplying it by me.timer.tick.
+			// me.timer.tick makes the movementlook smooth
+			this.body.vel.x += this.body.accel.x * me.timer.tick;
+			this.facing = "right";
+			// Makes player walk right
+			this.flipX(true);
+	},
+
+	moveLeft: function(){
+		// adds to the position of my x by the velocity defined above in
+			// setVelocity() and multiplying it by me.timer.tick.
+			// me.timer.tick makes the movementlook smooth
+			this.body.vel.x -= this.body.accel.x * me.timer.tick;
+			this.facing = "left";
+			// Makes player walk left
+			this.flipX(false);
+	},
+
+	jump: function(){
+		if (!this.body.jumping && !this.body.falling) {
+      			// set current vel to the maximum defined value
+      			// gravity will then do the rest
+      			this.body.vel.y = -this.body.maxVel.y * me.timer.tick;
+      			// set the jumping flag
+      			this.body.jumping = true;
+      			me.audio.play("Boing");
+    		}
+    	},
 
 	loseHealth: function(damage){
 		this.health = this.health - damage; 

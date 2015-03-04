@@ -12,8 +12,11 @@ game.PlayScreen = me.ScreenObject.extend({
 		this.resetPlayer(0, 500);
 		
 		// Manages game timers
-		var gamemanager = me.pool.pull("GameManager", 0, 0, {});
-		me.game.world.addChild(gamemanager, 0);
+		var gameTimerManager = me.pool.pull("GameTimerManager", 0, 0, {});
+		me.game.world.addChild(gameTimerManager, 0);
+
+		var heroDeathManager = me.pool.pull("HeroDeathManager", 0, 0, {});
+		me.game.world.addChild(heroDeathManager, 0);
 
 		// binds keys with movement
 		me.input.bindKey(me.input.KEY.RIGHT, "right");

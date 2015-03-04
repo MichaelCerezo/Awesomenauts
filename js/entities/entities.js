@@ -2,7 +2,7 @@
 game.PlayerEntity = me.Entity.extend({
 	// Sets up constructer functions and parameters
 	init: function (x, y, settings){
-		this.setSuper();
+		this.setSuper(x, y);
 		this.setAttributes();
 		this.setPlayerTimers();
 		this.type = "PlayerEntity";
@@ -19,7 +19,7 @@ game.PlayerEntity = me.Entity.extend({
 	},
 
 	// Changed the init functions to there own functions 
-	setSuper: function(){
+	setSuper: function(x, y){
 		this._super(me.Entity, 'init', [x, y, {
 			image:	"player",
 			// Tells the program how much space to preserve
@@ -29,7 +29,7 @@ game.PlayerEntity = me.Entity.extend({
 			spritewidth: "64",
 			spriteheight: "64",
 			getShape: function (){
-			`	return(new me.Rect(0, 0, 64, 64)).toPolygon();
+				return(new me.Rect(0, 0, 64, 64)).toPolygon();
 			}
 		}]);
 	},
@@ -64,7 +64,7 @@ game.PlayerEntity = me.Entity.extend({
 	update: function (delta){
 		this.now = new Date().getTime();
 		// Handles the checkIfDead function
-		this.dead = checkIfDead();
+		this.dead = this.checkIfDead();
 		this.checkKeyPressedAndMoved();
 		this.setAnimation();
 		me.collision.check(this, true, this.collideHandler.bind(this), true);
@@ -184,7 +184,7 @@ game.PlayerEntity = me.Entity.extend({
 			// Sets enemy base to lose health
 			response.b.loseHealth(game.data.playerAttack);
 		}
-	}
+	},
 
 	collideWithEnemyCreep: function(response){
 		var xdif = this.pos.x - response.b.pos.x;
@@ -219,7 +219,7 @@ game.PlayerEntity = me.Entity.extend({
 			return true;
 		}
 		return false;
-	}
+	},
 
 	hitCreep: function(response){
 		if(response.b.health <= game.data.playerAttack) {

@@ -37,15 +37,15 @@ game.resources = [
 	 * @example
 	 * {name: "example_bgm", type: "audio", src: "data/bgm/"},
 	 */	
-	 {name: "Awesomenauts", type: "audio", src: "data/bgm/"},
-	 {name: "battle", type: "audio", src: "data/bgm/"},
+	 // {name: "Awesomenauts", type: "audio", src: "data/bgm/"},
+	 // {name: "battle", type: "audio", src: "data/bgm/"},
 
 
 	/* Sound effects. 
 	 * @example
 	 * {name: "example_sfx", type: "audio", src: "data/sfx/"}
 	 */
-	 {name: "Dying", type: "audio", src: "data/sfx/"},
-	 {name: "Stab", type: "audio", src: "data/sfx/"},
-	 {name: "Boing", type: "audio", src: "data/sfx/"}
+	 // {name: "Dying", type: "audio", src: "data/sfx/"},
+	 // {name: "Stab", type: "audio", src: "data/sfx/"},
+	 // {name: "Boing", type: "audio", src: "data/sfx/"}
 ];

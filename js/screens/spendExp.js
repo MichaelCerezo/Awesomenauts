@@ -57,11 +57,11 @@ game.SpendExp = me.ScreenObject.extend({
 	 *  action to perform when leaving this screen (state change)
 	 */
 	onDestroyEvent: function() {
-		me.input.unbindKEY(me.input.KEY.F1, "F1");
-		me.input.unbindKEY(me.input.KEY.F2, "F2");
-		me.input.unbindKEY(me.input.KEY.F3, "F3");
-		me.input.unbindKEY(me.input.KEY.F4, "F4");
-		me.input.unbindKEY(me.input.KEY.F5, "F5");
+		me.input.unbindKey(me.input.KEY.F1, "F1");
+		me.input.unbindKey(me.input.KEY.F2, "F2");
+		me.input.unbindKey(me.input.KEY.F3, "F3");
+		me.input.unbindKey(me.input.KEY.F4, "F4");
+		me.input.unbindKey(me.input.KEY.F5, "F5");
 		me.event.unsubscribe(this.handler);
 	}
 });

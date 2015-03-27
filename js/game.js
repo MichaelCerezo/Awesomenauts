@@ -20,12 +20,12 @@ var game = {
 		player: "",
 		exp: 0,
 		gold: 0,
-		skill1:
-		skill2:
-		skill3:
-		ability1:
-		ability2:
-		ability3:
+		skill1: "",
+		skill2: "",
+		skill3: "",
+		ability1: "",
+		ability2: "",
+		ability3: "",
 		exp1: 0,
 		exp2: 0,
 		exp3: 0,

@@ -53,8 +53,6 @@ var game = {
 		});
 	}
 
-	me.save.add({exp: 0, exp1: 0, exp2: 0, exp3: 0, exp4: 0});
-
 	me.state.SPENDEXP = 112;
 	me.state.NEW = 113;
 	me.state.LOAD = 114;

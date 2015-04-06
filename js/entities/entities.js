@@ -38,6 +38,7 @@ game.PlayerEntity = me.Entity.extend({
 		// returns the numeric value corresponding to the time for the specified date according to universal time. 
 		this.now = new Date().getTime();
 		this.lastHit = this.now;
+		this.lastSpear();
 		this.lastAttack = new Date().getTime();
 	},
 
@@ -66,6 +67,7 @@ game.PlayerEntity = me.Entity.extend({
 		// Handles the checkIfDead function
 		this.dead = this.checkIfDead();
 		this.checkKeyPressedAndMoved();
+		this.checkAbilityKeys();
 		this.setAnimation();
 		me.collision.check(this, true, this.collideHandler.bind(this), true);
 		this.body.update(delta);
@@ -118,14 +120,30 @@ game.PlayerEntity = me.Entity.extend({
 
 	jump: function(){
 		if (!this.body.jumping && !this.body.falling) {
-      			// set current vel to the maximum defined value
-      			// gravity will then do the rest
-      			this.body.vel.y = -this.body.maxVel.y * me.timer.tick;
-      			// set the jumping flag
-      			this.body.jumping = true;
-      			// me.audio.play("Boing");
-    		}
-    	},
+      		// set current vel to the maximum defined value
+   			// gravity will then do the rest
+      		this.body.vel.y = -this.body.maxVel.y * me.timer.tick;
+      		// set the jumping flag
+      		this.body.jumping = true;
+      		// me.audio.play("Boing");
+    	}
+    },
+
+    checkAbilityKeys: function(){
+    	if(me.input.isKeyPressed("skill1")){
+    		// this.speedBurst();
+    	}else if(me.input.isKeyPressed("skill2")){
+    		// this.eatCreep();
+    	}else if(me.input.isKeyPressed("skill3")){
+    		this.throwSpear();
+    	}
+    },
+
+    throwSpear: function(this.lastSpear >= game.data.spearTimer && game.data.ability3 >= 0){
+    	this.lastSpear = this.now;
+			var spear = me.pool.pull("spear", this.pos.x, this.pos.y, {});
+			me.game.world.addChild(spear, 10);
+    },
 
     setAnimation: function(){
     	if (this.attacking) {

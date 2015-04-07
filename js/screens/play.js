@@ -5,8 +5,6 @@ game.PlayScreen = me.ScreenObject.extend({
 	onResetEvent: function() {
 		// reset the score
 		game.data.score = 0;
-		console.log(game.data.exp);
-		console.log(game.data.exp2);
 
 		// lets the game know what map to load
 		me.levelDirector.loadLevel("level01");

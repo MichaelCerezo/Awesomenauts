@@ -25,7 +25,7 @@ game.PlayerCreep = me.Entity.extend({
 
 		this.type = "PlayerCreep";
 
-		this.renderable.addAnimation("walk", [0, 1, 2, 3, 4,], 80);
+		this.renderable.addAnimation("walk", [0, 1, 2, 3, 4], 80);
 		this.renderable.setCurrentAnimation("walk");
 	},
 

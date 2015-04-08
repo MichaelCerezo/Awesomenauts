@@ -49,7 +49,7 @@ game.SpendGold = Object.extend({
 	setBuyText: function(){
 		game.data.buytext = new (me.Renderable.extend({
 			init: function(){
-				this._super(me.Renderable, 'init', [game.data.pausePos.x, game.data.pausePos.y, 300, 50]);
+				this._super(me.Renderable, 'init', [game.data.pausePos.x, game.data.pausePos.y, 1, 1]);
 				this.font = new me.Font("Arial", 26, "white");
 				this.updateWhenPaused = true;
 				this.alwaysUpdate = true;
@@ -67,7 +67,7 @@ game.SpendGold = Object.extend({
 
 			
 			}));
-		me.game.world.addChild();
+		me.game.world.addChild(game.data.buytext, 35);
 	},
 
 	stopBuying: function(){
@@ -138,11 +138,11 @@ game.SpendGold = Object.extend({
 		}else if(skill === 2){
 			game.data.gold -= ((game.data.skill2 +1)*10);
 			game.data.skill2 += 1;
-			game.data.playerMoveSpeed += 1;
+			// game.data.playerMoveSpeed += 1;
 		}else if(skill === 3){
 			game.data.gold -= ((game.data.skill3 +1)*10);
 			game.data.skill3 += 1;
-			game.data.playerHealth += 1;
+			// game.data.playerHealth += 1;
 		}else if(skill === 4){
 			game.data.gold -= ((game.data.ability1 +1)*10);
 			game.data.ability1 += 1;

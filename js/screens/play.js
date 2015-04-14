@@ -28,6 +28,7 @@ game.PlayScreen = me.ScreenObject.extend({
 		me.game.world.addChild(game.data.minimap, 30);
 
 		// binds keys with movement
+		me.input.bindKey(me.input.KEY.Z, "toggle");
 		me.input.bindKey(me.input.KEY.B, "buy");
 		me.input.bindKey(me.input.KEY.Q, "skill1");
 		me.input.bindKey(me.input.KEY.W, "skill2");
@@ -40,7 +41,7 @@ game.PlayScreen = me.ScreenObject.extend({
 		// add our HUD to the game world
 		this.HUD = new game.HUD.Container();
 		me.game.world.addChild(this.HUD);
-		// me.audio.playTrack("battle");
+		me.audio.playTrack("battle");
 	},
 
 

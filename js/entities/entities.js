@@ -78,7 +78,7 @@ game.PlayerEntity = me.Entity.extend({
 	checkIfDead: function(){
 		if(this.health <= 0){
 		 	return true;
-		 	// me.audio.play("Dying");
+		 	me.audio.play("Dying");
 		}
 		return false;
 	},
@@ -125,7 +125,7 @@ game.PlayerEntity = me.Entity.extend({
       		this.body.vel.y = -this.body.maxVel.y * me.timer.tick;
       		// set the jumping flag
       		this.body.jumping = true;
-      		// me.audio.play("Boing");
+      		me.audio.play("Boing");
     	}
     },
 
@@ -157,7 +157,7 @@ game.PlayerEntity = me.Entity.extend({
 				// from the first animation, not wherever we left off when we
 				// switched off to another animation
 				this.renderable.setAnimationFrame();
-				// me.audio.play("Stab");
+				me.audio.play("Stab");
 			}
 		}
 		// Sets animation when needed

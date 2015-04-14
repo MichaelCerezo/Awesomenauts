@@ -12,5 +12,22 @@ game.MiniMap = me.Entity.extend({
 			}
 		}]);
 		this.floating = true;
+
+		// update: function(){
+		// this.now = new Date().getTime();
+
+		// if(me.input.isKeyPressed("toggle")){
+		// 	if(){
+				
+		// 	}else{
+				
+		// 	}
+
+		// }
+
+		// this.checkBuyKeys();
+
+		// return true;
+		// },
 	},
 });
